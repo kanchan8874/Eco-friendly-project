@@ -10,9 +10,7 @@ const updateProduct = () => {
     const router = useRouter();
     const [productList, setProductList] = useState(null);
     const { id } = useParams();
-
-
-
+    
     const fetchProduct = async () => {
         const res = await axios.get('http://localhost:5000/product/getbyid/' + id)
         console.log(res.data);
@@ -33,19 +31,16 @@ const updateProduct = () => {
             })
             .catch((err) => {
                 console.log(err);
-                toast.error('Failed to update design');
+                toast.error('Failed to update product');
 
             })
-
     }
-
-    const getProduct = async () => {
+    const getProductList = async () => {
         const res = await axios.get('https://localhost:5000/product/getbyid/' + id);
         console.log(res.data);
         setProductList(res.data);
 
     }
-
     return (
         <>
             <div className='max-w-xl mx-auto'>
@@ -101,7 +96,7 @@ const updateProduct = () => {
                             </div>
                             {/* Form */}
                             {
-                                designData !== null ? (
+                                productList !== null ? (
                                     <Formik initialValues={productList} onSubmit={submitForm}>
                                         {
 
@@ -141,14 +136,14 @@ const updateProduct = () => {
                                                                         </svg>
                                                                     </div>
                                                                 </div>
-                                                                {/* {
-                                        (updateForm.errors.name && updateForm.touched.name) && (
-                                            <p className=" text-xs text-red-600 mt-2" id="email-error">
-                                                {updateForm.errors.name}
-                                            </p>
+                                                                {
+                                                                    (updateForm.errors.name && updateForm.touched.name) && (
+                                                                        <p className=" text-xs text-red-600 mt-2" id="email-error">
+                                                                            {updateForm.errors.name}
+                                                                        </p>
 
-                                        )
-                                    } */}
+                                                                    )
+                                                                }
 
                                                             </div>
                                                             {/* End Form Group */}
@@ -158,14 +153,14 @@ const updateProduct = () => {
                                                                     htmlFor="email"
                                                                     className="block text-sm mb-2 dark:text-white"
                                                                 >
-                                                                    File
+                                                                    Brand
                                                                 </label>
                                                                 <div className="relative">
                                                                     <input
                                                                         type="text"
-                                                                        id="file"
+                                                                        id="brand"
                                                                         onChange={updateForm.handleChange}
-                                                                        value={updateForm.values.file}
+                                                                        value={updateForm.values.brand}
                                                                         className="border py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                         required=""
                                                                         aria-describedby="email-error"
@@ -266,14 +261,14 @@ const updateProduct = () => {
                                                                     htmlFor="password"
                                                                     className="block text-sm mb-2 dark:text-white"
                                                                 >
-                                                                    uploadBy
+                                                                    category
                                                                 </label>
                                                                 <div className="relative">
                                                                     <input
                                                                         type="text"
-                                                                        id="uploadBy"
+                                                                        id="category"
                                                                         onChange={updateForm.handleChange}
-                                                                        value={updateForm.values.uploadBy}
+                                                                        value={updateForm.values.category}
                                                                         className="border py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                                         required=""
                                                                         aria-describedby="password-error"
@@ -329,8 +324,6 @@ const updateProduct = () => {
                                                                     8+ characters required
                                                                 </p>
                                                             </div>
-
-
                                                             {/* End Form Group */}
                                                             {/* Checkbox */}
                                                             <div className="flex items-center">

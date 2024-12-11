@@ -23,18 +23,16 @@ const ManageProducts = () => {
     }, [])
     const deleteProduct = (id) => {
         axios.delete('http://localhost:5000/product/delete/' + id)
-          .then((result) => {
-            toast.success('User Deleted Successfully');
-            fetchProduct();
-          })
-          .catch((err) => {
-            console.log(err);
-            toast.error('Failed to delete user');
-          })
-    
-      }
+            .then((result) => {
+                toast.success('User Deleted Successfully');
+                fetchProduct();
+            })
+            .catch((err) => {
+                console.log(err);
+                toast.error('Failed to delete user');
+            })
 
-
+    }
     return (
         <div className=''>
             <div className='container mx-auto py-10'>
@@ -57,11 +55,15 @@ const ManageProducts = () => {
                         {
                             productList.map((product) => {
                                 return (
-                                    <tr className='border bg-gray-200'>
+                                    <tr key={product._id} className='border bg-gray-200'>
                                         <td className='p-3'>{product._id} </td>
                                         <td className='p-3'>{product.name} </td>
+                                        <td className='p-3'>{product.brand} </td>
                                         <td className='p-3'>{product.price} </td>
                                         <td className='p-3'>{product.description} </td>
+                                        <td className='p-3'>
+                                            <img src={product.image} alt="" />
+                                        </td>
                                         <td className='p-3'>{product.category} </td>
                                         <td className='p-3'>{new Date(product.createdAt).toDateString()}</td>
                                         {<td className='p-3'>
@@ -86,5 +88,4 @@ const ManageProducts = () => {
         </div>
     )
 }
-
 export default ManageProducts;
